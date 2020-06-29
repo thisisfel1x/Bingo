@@ -1,0 +1,17 @@
+name: Bingo
+version: ${project.version}
+main: de.fel1x.bingo.Bingo
+authors: [fel1x]
+website: teamcrimx.de
+api-version: 1.15
+
+commands:
+  items:
+    description: check the to-do items
+
+  backpack:
+    description: open your team backpack
+    aliases: [bp]
+
+  skipitem:
+    description: skip items which you don't want
