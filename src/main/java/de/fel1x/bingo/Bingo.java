@@ -106,6 +106,7 @@ public final class Bingo extends JavaPlugin {
         new FoodListener(this);
         new DeathListener(this);
         new RespawnListener(this);
+        new ChatListener(this);
 
         // BLOCK
         new BlockTransformListener(this);
