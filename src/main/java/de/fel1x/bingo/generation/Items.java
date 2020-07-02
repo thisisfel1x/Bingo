@@ -309,7 +309,7 @@ public class Items {
         items.add(new BingoItem(Material.GOLD_NUGGET, BingoDifficulty.EASY));
         items.add(new BingoItem(Material.RABBIT_HIDE, BingoDifficulty.HARDCORE));
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Collections.shuffle(items);
         }
 

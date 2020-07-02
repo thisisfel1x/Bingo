@@ -3,6 +3,7 @@ package de.fel1x.bingo.tasks;
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.gamehandler.Gamestate;
 import de.fel1x.bingo.objects.BingoTeam;
+import de.fel1x.bingo.scenarios.AnvilRain;
 import de.fel1x.bingo.scenarios.IBingoScenario;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -21,12 +22,13 @@ public class GameTask implements IBingoTask {
     int taskId = 0;
     int timer = 0;
 
-    int eventTimer = 120;
-
     boolean isRunning = false;
 
     BossBar bossBar;
+
     Random random = new Random();
+    int eventTimer = random.nextInt(120) + 60;
+    double timeToGo = eventTimer;
 
     @Override
     public void start() {
@@ -45,17 +47,23 @@ public class GameTask implements IBingoTask {
             taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(bingo, () -> {
 
                 bossBar.setColor(this.getColor(eventTimer));
-                bossBar.setProgress(eventTimer / 120D);
-                bossBar.setTitle(String.format("§7Nächstes Event in §e%s", ((eventTimer == 1) ? "einer Sekunde" : eventTimer + " Sekunden")));
+                bossBar.setProgress(eventTimer / timeToGo);
+                if(eventTimer > 0) {
+                    bossBar.setTitle(String.format("§7Nächstes Event in §e%s", ((eventTimer == 1) ? "einer Sekunde" :
+                            ((eventTimer <= 60) ? eventTimer + " Sekunden" :
+                                    String.format("%02d:%02d", eventTimer / 60, eventTimer % 60)))));
+                }
 
                 Bukkit.getOnlinePlayers().forEach(player -> player.sendActionBar("§7Vergangene Zeit: §e§l" + this.formatSeconds(timer)));
 
                 if (eventTimer == 0) {
-                    eventTimer = 120;
+                    eventTimer = random.nextInt(120) + 60;
+                    timeToGo = eventTimer;
 
                     try {
                         IBingoScenario bingoScenario = bingo.startRandomScenario().get(random.nextInt(bingo.startRandomScenario().size())).newInstance();
                         bingoScenario.execute();
+                        bossBar.setTitle("§7Event §8» §a§l" + bingoScenario.getName());
                     } catch (InstantiationException | IllegalAccessException e) {
                         e.printStackTrace();
                     }
@@ -124,7 +132,7 @@ public class GameTask implements IBingoTask {
 
     private BarColor getColor(int progress) {
 
-        double fraction = progress / 120D;
+        double fraction = progress / timeToGo;
 
         if (fraction > 0.66) {
             return BarColor.GREEN;

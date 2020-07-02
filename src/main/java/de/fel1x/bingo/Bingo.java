@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public final class Bingo extends JavaPlugin {
 
     public static Bingo instance;
-    ArrayList<Entity> blocks;
+    ArrayList<Entity> fallingGlassBlocks, fallingAnvils;
     private String prefix = "§6§lBingo §8● §r";
 
     private PluginManager pluginManager;
@@ -56,7 +56,8 @@ public final class Bingo extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        blocks = new ArrayList<>();
+        fallingGlassBlocks = new ArrayList<>();
+        fallingAnvils = new ArrayList<>();
 
         pluginManager = Bukkit.getPluginManager();
 
@@ -107,6 +108,7 @@ public final class Bingo extends JavaPlugin {
         new DeathListener(this);
         new RespawnListener(this);
         new ChatListener(this);
+        new ServerPingListener(this);
 
         // BLOCK
         new BlockTransformListener(this);
@@ -183,11 +185,15 @@ public final class Bingo extends JavaPlugin {
         return worldGenerator;
     }
 
-    public ArrayList<Entity> getBlocks() {
-        return blocks;
+    public ArrayList<Entity> getFallingGlassBlocks() {
+        return fallingGlassBlocks;
     }
 
     public BingoScoreboard getBingoScoreboard() {
         return bingoScoreboard;
+    }
+
+    public ArrayList<Entity> getFallingAnvils() {
+        return fallingAnvils;
     }
 }

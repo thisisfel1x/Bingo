@@ -102,7 +102,7 @@ public class PreGameTask implements IBingoTask {
                             float z = -2.0F + (float) (Math.random() * 4.0D + 1.0D);
 
                             FallingBlock fallingBlock = block.getWorld().spawnFallingBlock(block.getLocation(), block.getBlockData());
-                            bingo.getBlocks().add(fallingBlock);
+                            bingo.getFallingGlassBlocks().add(fallingBlock);
 
                             fallingBlock.setVelocity(new Vector(x, y, z));
                             fallingBlock.setDropItem(false);

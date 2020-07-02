@@ -6,7 +6,6 @@ import de.fel1x.bingo.gamehandler.Gamestate;
 import de.fel1x.bingo.objects.BingoPlayer;
 import de.fel1x.bingo.utils.Utils;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

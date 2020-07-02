@@ -4,4 +4,6 @@ public interface IBingoScenario {
 
     void execute();
 
+    String getName();
+
 }

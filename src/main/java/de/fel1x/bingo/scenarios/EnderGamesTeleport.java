@@ -42,4 +42,9 @@ public class EnderGamesTeleport implements IBingoScenario {
         player2.sendMessage(bingo.getPrefix() + "§7Du wurdest mit " + player1.getDisplayName() + " §7getauscht!");
 
     }
+
+    @Override
+    public String getName() {
+        return "EnderGames Teleport";
+    }
 }
