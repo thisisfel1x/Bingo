@@ -26,6 +26,7 @@ public class InteractListener implements Listener {
     public void on(PlayerInteractEvent event) {
 
         Player player = event.getPlayer();
+
         BingoPlayer bingoPlayer = new BingoPlayer(player);
         Gamestate gamestate = bingo.getGamestateHandler().getGamestate();
 
@@ -34,7 +35,9 @@ public class InteractListener implements Listener {
             case IDLE:
             case LOBBY:
 
-                if (event.getMaterial().equals(Material.RED_BED) && Objects.requireNonNull(event.getItem()).getItemMeta().getDisplayName().equalsIgnoreCase("§8» §a§lWähle dein Team")
+                if (event.getMaterial().equals(Material.RED_BED)
+                        && Objects.requireNonNull(event.getItem()).getItemMeta().getDisplayName()
+                        .equalsIgnoreCase("§8» §a§lWähle dein Team")
                         && (event.getAction().equals(Action.RIGHT_CLICK_AIR))) {
 
                     TeamSelectorInventory.TEAM_SELECTOR.open(player);
@@ -53,7 +56,9 @@ public class InteractListener implements Listener {
 
             case INGAME:
 
-                event.setCancelled(false);
+                if(bingoPlayer.isSpectator()) {
+                    event.setCancelled(true);
+                }
 
                 break;
 

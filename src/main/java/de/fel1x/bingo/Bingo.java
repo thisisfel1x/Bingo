@@ -10,6 +10,7 @@ import de.fel1x.bingo.listener.block.BlockBreakListener;
 import de.fel1x.bingo.listener.block.BlockPlaceListener;
 import de.fel1x.bingo.listener.block.BlockTransformListener;
 import de.fel1x.bingo.listener.entity.DamageListener;
+import de.fel1x.bingo.listener.entity.EntityTargetListener;
 import de.fel1x.bingo.listener.player.*;
 import de.fel1x.bingo.scenarios.IBingoScenario;
 import de.fel1x.bingo.tasks.IBingoTask;
@@ -109,6 +110,7 @@ public final class Bingo extends JavaPlugin {
         new RespawnListener(this);
         new ChatListener(this);
         new ServerPingListener(this);
+        new BucketListener(this);
 
         // BLOCK
         new BlockTransformListener(this);
@@ -117,6 +119,7 @@ public final class Bingo extends JavaPlugin {
 
         // ENTITY
         new DamageListener(this);
+        new EntityTargetListener(this);
 
     }
 

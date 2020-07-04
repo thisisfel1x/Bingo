@@ -26,6 +26,7 @@ public class ChatListener implements Listener {
     public void on(AsyncPlayerChatEvent event) {
 
         Player player = event.getPlayer();
+
         BingoPlayer bingoPlayer = new BingoPlayer(player);
         Gamestate gamestate = bingo.getGamestateHandler().getGamestate();
 

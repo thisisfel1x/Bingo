@@ -2,11 +2,13 @@ package de.fel1x.bingo.scenarios;
 
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.Data;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.material.MaterialData;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
@@ -24,22 +26,38 @@ public class AnvilRain implements IBingoScenario {
 
             int toGo = random.nextInt(5) + 15;
 
-            for (int i = 0; i < toGo; i++) {
+            new BukkitRunnable() {
 
-                Location currentLocation = player.getLocation();
+                int timer = 0;
 
-                int x = (random.nextInt(7)) * ((random.nextBoolean()) ? 1 : -1);
-                int z = (random.nextInt(7)) * ((random.nextBoolean()) ? 1 : -1);
-                Block blockToChange = currentLocation.add(x, 25, z).getBlock();
+                @Override
+                public void run() {
 
-                if (blockToChange.getType() != Material.AIR && blockToChange.getType() != Material.CAVE_AIR) continue;
+                    for (int i = 0; i < toGo; i++) {
 
-                FallingBlock fallingBlock = blockToChange.getLocation().getWorld().spawnFallingBlock(blockToChange.getLocation(),
-                        new MaterialData(Material.ANVIL));
+                        Location currentLocation = player.getLocation();
 
-                this.bingo.getFallingAnvils().add(fallingBlock);
+                        int x = (random.nextInt(7)) * ((random.nextBoolean()) ? 1 : -1);
+                        int z = (random.nextInt(7)) * ((random.nextBoolean()) ? 1 : -1);
+                        Block blockToChange = currentLocation.add(x, 25, z).getBlock();
 
-            }
+                        if (blockToChange.getType() != Material.AIR && blockToChange.getType() != Material.CAVE_AIR) continue;
+
+                        FallingBlock fallingBlock = blockToChange.getLocation().getWorld().spawnFallingBlock(blockToChange.getLocation(),
+                                new MaterialData(Material.ANVIL));
+
+                        bingo.getFallingAnvils().add(fallingBlock);
+
+                    }
+
+                    if(timer == 10) {
+                        this.cancel();
+                    }
+
+                    timer++;
+
+                }
+            }.runTaskTimer(bingo, 0L, 10L);
 
         });
 
@@ -48,5 +66,10 @@ public class AnvilRain implements IBingoScenario {
     @Override
     public String getName() {
         return "Anvil Rain";
+    }
+
+    @Override
+    public Material getDisplayMaterial() {
+        return Material.ANVIL;
     }
 }
