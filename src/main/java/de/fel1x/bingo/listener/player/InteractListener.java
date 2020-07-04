@@ -2,6 +2,7 @@ package de.fel1x.bingo.listener.player;
 
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.gamehandler.Gamestate;
+import de.fel1x.bingo.inventories.SpectatorCompassInventory;
 import de.fel1x.bingo.inventories.TeamSelectorInventory;
 import de.fel1x.bingo.objects.BingoPlayer;
 import org.bukkit.Material;
@@ -58,6 +59,16 @@ public class InteractListener implements Listener {
 
                 if(bingoPlayer.isSpectator()) {
                     event.setCancelled(true);
+
+                    if (event.getMaterial().equals(Material.COMPASS)
+                            && Objects.requireNonNull(event.getItem()).getItemMeta().getDisplayName()
+                            .equalsIgnoreCase("§7Spieler beoabachten")
+                            && (event.getAction().equals(Action.RIGHT_CLICK_AIR))) {
+
+                        SpectatorCompassInventory.INVENTORY.open(player);
+                        return;
+
+                    }
                 }
 
                 break;
