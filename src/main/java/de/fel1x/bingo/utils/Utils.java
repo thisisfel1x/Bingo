@@ -1,7 +1,6 @@
 package de.fel1x.bingo.utils;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
+import org.bukkit.*;
 
 public class Utils {
 
@@ -21,5 +20,4 @@ public class Utils {
         else if (color.equals(Color.GRAY)) return ChatColor.DARK_GRAY;
         else return null;
     }
-
 }

@@ -15,12 +15,17 @@ import org.bukkit.entity.Firework;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class BingoItemListener implements Listener {
 
     Bingo bingo;
+    int timer = 0;
+
+    Random random = new Random();
 
     public BingoItemListener(Bingo bingo) {
         this.bingo = bingo;
@@ -53,6 +58,9 @@ public class BingoItemListener implements Listener {
 
                 if ((bingoPlayer.isPlayer() && !bingoPlayer.getTeam().equals(event.getTeam())) || bingoPlayer.isSpectator()) {
                     player.teleport(event.getPlayer());
+                    if(bingoPlayer.isSpectator()) {
+                        Bukkit.getOnlinePlayers().forEach(onlinePlayer -> onlinePlayer.showPlayer(bingo, onlinePlayer));
+                    }
                 }
 
                 player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 2, 0.5f);
@@ -66,21 +74,31 @@ public class BingoItemListener implements Listener {
                 player.setHealth(20);
                 player.setFoodLevel(20);
 
-                for (int i = 0; i < 5; i++) {
-                    Firework firework = (Firework) player.getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
-                    FireworkEffect effect = FireworkEffect.builder().with(FireworkEffect.Type.BALL_LARGE)
-                            .withColor(bingoTeam.getColor())
-                            .build();
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
 
-                    FireworkMeta meta = firework.getFireworkMeta();
-                    meta.setPower(2);
-                    meta.addEffect(effect);
-                    firework.setFireworkMeta(meta);
-                }
+                        for (int i = 0; i < 3; i++) {
+                            Firework firework = (Firework) player.getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
+                            FireworkEffect effect = FireworkEffect.builder().
+                                    with(FireworkEffect.Type.values()[random.nextInt(FireworkEffect.Type.values().length)])
+                                    .withColor(bingoTeam.getColor())
+                                    .build();
 
+                            FireworkMeta meta = firework.getFireworkMeta();
+                            meta.setPower(2);
+                            meta.addEffect(effect);
+                            firework.setFireworkMeta(meta);
+                        }
+
+                        if(timer == 10) {
+                            this.cancel();
+                        }
+
+                        timer++;
+                    }
+                }.runTaskTimer(bingo, 0L, 10L);
             });
-
         }
     }
-
 }

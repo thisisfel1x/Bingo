@@ -27,12 +27,15 @@ public class BingoScoreboard {
             "§8(§a/items§8)"
 
     };
+
     int counter = 0;
     int i;
+
     private Scoreboard gameScoreboard;
-    private Scoreboard lobbyScoreboard;
     private Objective objective;
+
     private Map<BingoTeam, Team> scoreboardTeams;
+    private Team spectatorTeam;
 
     public BingoScoreboard() {
 
@@ -48,13 +51,17 @@ public class BingoScoreboard {
             String color = Utils.getChatColor(bingoTeam.getColor()).toString();
 
             Team team = gameScoreboard.registerNewTeam("00" + counter + bingoTeam.getName());
-            team.setPrefix(String.format("%s%s" + " §7| %s", color, bingoTeam.getName(), color));
+            team.setPrefix(String.format("%s%s" + " §8| %s", color, bingoTeam.getName(), color));
             team.setDisplayName(color);
 
             scoreboardTeams.put(bingoTeam, team);
             counter++;
 
         }
+
+        spectatorTeam = gameScoreboard.registerNewTeam("00999Spectator");
+        spectatorTeam.setPrefix("§7§oSpectator §r§8| §7");
+        spectatorTeam.setDisplayName("§7");
 
         for (int i = 1; i <= 6; i++) {
             Team top = gameScoreboard.registerNewTeam("top" + i);
