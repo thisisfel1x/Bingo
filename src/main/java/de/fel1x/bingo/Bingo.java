@@ -57,6 +57,8 @@ public final class Bingo extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        Bukkit.getConsoleSender().sendMessage(this.prefix + "§6Trying to load Bingo");
+
         fallingGlassBlocks = new ArrayList<>();
         fallingAnvils = new ArrayList<>();
 
@@ -80,11 +82,14 @@ public final class Bingo extends JavaPlugin {
         bingoTask = new IdleTask();
         bingoTask.start();
 
+        Bukkit.getConsoleSender().sendMessage(this.prefix + "§aThe plugin was successfully enabled!");
+
     }
 
     @Override
     public void onDisable() {
 
+        Bukkit.getConsoleSender().sendMessage(this.prefix + "§cThe plugin was successfully disabled!");
 
     }
 
