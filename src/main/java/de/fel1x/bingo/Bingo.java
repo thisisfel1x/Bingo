@@ -10,6 +10,7 @@ import de.fel1x.bingo.listener.block.BlockBreakListener;
 import de.fel1x.bingo.listener.block.BlockPlaceListener;
 import de.fel1x.bingo.listener.block.BlockTransformListener;
 import de.fel1x.bingo.listener.entity.DamageListener;
+import de.fel1x.bingo.listener.entity.EntityTargetListener;
 import de.fel1x.bingo.listener.player.*;
 import de.fel1x.bingo.scenarios.IBingoScenario;
 import de.fel1x.bingo.tasks.IBingoTask;
@@ -56,6 +57,8 @@ public final class Bingo extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        Bukkit.getConsoleSender().sendMessage(this.prefix + "§6Trying to load Bingo");
+
         fallingGlassBlocks = new ArrayList<>();
         fallingAnvils = new ArrayList<>();
 
@@ -79,11 +82,14 @@ public final class Bingo extends JavaPlugin {
         bingoTask = new IdleTask();
         bingoTask.start();
 
+        Bukkit.getConsoleSender().sendMessage(this.prefix + "§aThe plugin was successfully enabled!");
+
     }
 
     @Override
     public void onDisable() {
 
+        Bukkit.getConsoleSender().sendMessage(this.prefix + "§cThe plugin was successfully disabled!");
 
     }
 
@@ -109,6 +115,7 @@ public final class Bingo extends JavaPlugin {
         new RespawnListener(this);
         new ChatListener(this);
         new ServerPingListener(this);
+        new BucketListener(this);
 
         // BLOCK
         new BlockTransformListener(this);
@@ -117,6 +124,7 @@ public final class Bingo extends JavaPlugin {
 
         // ENTITY
         new DamageListener(this);
+        new EntityTargetListener(this);
 
     }
 

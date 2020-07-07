@@ -26,12 +26,11 @@ public class BlockTransformListener implements Listener {
 
         if(event.getEntity() instanceof FallingBlock) {
 
-            if(bingo.getFallingAnvils().contains(entity) || bingo.getFallingGlassBlocks().contains(entity)) {
-                event.setCancelled(true);
-                event.getBlock().setType(Material.AIR);
-            }
-
             if(bingo.getFallingAnvils().contains(entity)) {
+                event.getBlock().setType(Material.AIR);
+                entity.remove();
+                event.getBlock().getDrops().clear();
+                event.setCancelled(true);
                 event.getEntity().getNearbyEntities(0, 1, 0).forEach(nearbyEntities -> {
                     if(!(nearbyEntities instanceof Player)) return;
 
@@ -44,12 +43,11 @@ public class BlockTransformListener implements Listener {
 
                 });
 
-                event.getBlock().getDrops().clear();
-                entity.remove();
-
                 bingo.getFallingAnvils().remove(entity);
 
             } else if(bingo.getFallingGlassBlocks().contains(entity)) {
+
+                event.setCancelled(true);
 
                 event.getBlock().setType(Material.AIR);
                 bingo.getFallingGlassBlocks().remove(entity);

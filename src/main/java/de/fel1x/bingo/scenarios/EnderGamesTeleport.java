@@ -2,6 +2,7 @@ package de.fel1x.bingo.scenarios;
 
 import de.fel1x.bingo.Bingo;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -46,5 +47,10 @@ public class EnderGamesTeleport implements IBingoScenario {
     @Override
     public String getName() {
         return "EnderGames Teleport";
+    }
+
+    @Override
+    public Material getDisplayMaterial() {
+        return Material.ENDER_PEARL;
     }
 }

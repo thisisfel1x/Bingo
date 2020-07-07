@@ -39,6 +39,9 @@ public class BlockPlaceListener implements Listener {
 
             case INGAME:
 
+                if(bingoPlayer.isSpectator()) {
+                    event.setCancelled(true);
+                }
 
                 break;
 

@@ -2,6 +2,7 @@ package de.fel1x.bingo.listener.entity;
 
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.gamehandler.Gamestate;
+import de.fel1x.bingo.objects.BingoPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,8 +26,10 @@ public class DamageListener implements Listener {
         if (!gamestate.equals(Gamestate.INGAME)) {
             event.setCancelled(true);
         } else {
-            if (event.getDamager() instanceof Player
-                    && event.getEntity() instanceof Player) {
+            if ((event.getDamager() instanceof Player
+                    && event.getEntity() instanceof Player) ||
+                    event.getEntity() instanceof Player &&
+                            new BingoPlayer((Player) event.getEntity()).isSpectator()) {
                 event.setCancelled(true);
             }
         }

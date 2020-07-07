@@ -9,23 +9,22 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
+import org.bukkit.event.player.PlayerBucketFillEvent;
 
-public class PickupListener implements Listener {
+public class BucketListener implements Listener {
 
     Bingo bingo;
 
-    public PickupListener(Bingo bingo) {
+    public BucketListener(Bingo bingo) {
         this.bingo = bingo;
         bingo.getPluginManager().registerEvents(this, bingo);
     }
 
     @EventHandler
-    public void on(EntityPickupItemEvent event) {
+    public void on(PlayerBucketFillEvent event) {
 
-        if (!(event.getEntity() instanceof Player)) return;
-
-        Player player = (Player) event.getEntity();
+        Player player = event.getPlayer();
         BingoPlayer bingoPlayer = new BingoPlayer(player);
 
         Gamestate gamestate = bingo.getGamestateHandler().getGamestate();
@@ -41,7 +40,7 @@ public class PickupListener implements Listener {
             }
 
             bingo.getItemGenerator().getPossibleItems().values().forEach(bingoItem -> {
-                if (bingoItem.getMaterial().equals(event.getItem().getItemStack().getType())) {
+                if (bingoItem.getMaterial().equals(event.getBucket())) {
                     int unlock = bingo.getItemGenerator().getPossibleItems().inverse().get(bingoItem);
                     Boolean[] array = bingoPlayer.getTeam().getDoneItems();
 
@@ -55,7 +54,7 @@ public class PickupListener implements Listener {
                                 + Utils.getChatColor(bingoPlayer.getTeam().getColor())
                                 + "Team " + bingoPlayer.getTeam().getName() + "§8)"
                                 + " §7hat das Item §b§l"
-                                + event.getItem().getItemStack().getType().name().replace('_', ' ') + " §7gefunden! §8(§a"
+                                + event.getBucket().name().replace('_', ' ') + " §7gefunden! §8(§a"
                                 + bingoPlayer.getTeam().getDoneItemsSize() + "§7/§c9§8)");
 
                         Bukkit.getServer().getPluginManager().callEvent(new BingoItemUnlockEvent(player, bingoPlayer.getTeam(), bingoItem));
@@ -65,6 +64,24 @@ public class PickupListener implements Listener {
         } else {
             event.setCancelled(true);
         }
+
     }
 
+    @EventHandler
+    public void on(PlayerBucketEmptyEvent event) {
+
+        Player player = event.getPlayer();
+        BingoPlayer bingoPlayer = new BingoPlayer(player);
+
+        Gamestate gamestate = bingo.getGamestateHandler().getGamestate();
+
+        if (gamestate.equals(Gamestate.INGAME)) {
+            if (!bingoPlayer.isPlayer()) {
+                event.setCancelled(true);
+            }
+
+        } else {
+            event.setCancelled(true);
+        }
+    }
 }

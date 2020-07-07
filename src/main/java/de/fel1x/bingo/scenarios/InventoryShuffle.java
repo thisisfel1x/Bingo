@@ -2,6 +2,7 @@ package de.fel1x.bingo.scenarios;
 
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.Data;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.inventory.ItemStack;
 
@@ -33,5 +34,10 @@ public class InventoryShuffle implements IBingoScenario {
     @Override
     public String getName() {
         return "Inventory Shuffle";
+    }
+
+    @Override
+    public Material getDisplayMaterial() {
+        return Material.REDSTONE;
     }
 }

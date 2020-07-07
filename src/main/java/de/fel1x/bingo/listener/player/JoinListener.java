@@ -53,6 +53,7 @@ public class JoinListener implements Listener {
 
             case INGAME:
                 bingoPlayer.addToSpectators();
+                bingoPlayer.activateSpectatorMode();
 
                 break;
 

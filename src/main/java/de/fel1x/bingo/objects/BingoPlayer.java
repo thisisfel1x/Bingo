@@ -2,9 +2,14 @@ package de.fel1x.bingo.objects;
 
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.Data;
+import de.fel1x.bingo.utils.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class BingoPlayer {
 
@@ -107,6 +112,24 @@ public class BingoPlayer {
         }
 
         bingoTeam.getTeamPlayers().add(player);
+
+    }
+
+    public void activateSpectatorMode() {
+
+        data.getPlayers().forEach(bingoPlayers -> bingoPlayers.hidePlayer(bingo, player));
+
+        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+        player.setHealth(20);
+        player.setFoodLevel(20);
+
+        player.setGameMode(GameMode.SURVIVAL);
+        player.setAllowFlight(true);
+        player.setFlying(true);
+
+        player.teleport(new Location(Bukkit.getWorlds().get(0), 0.5, 121, 0.5));
+
+        player.getInventory().setItem(0, new ItemBuilder(Material.COMPASS).setName("§7Spieler beoabachten").toItemStack());
 
     }
 }
