@@ -37,7 +37,7 @@ public class SkipItemCommand implements CommandExecutor {
             return false;
         }
 
-        if (!player.isOp()) return false;
+        if (!player.isOp() || !player.hasPermission("bingo.skipitem")) return false;
 
         SkipItemInventory.SKIP_INVENTORY.open(player);
         return true;
