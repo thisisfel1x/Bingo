@@ -1,4 +1,5 @@
 <h1>Bingo -  a minigame for PaperSpigot 1.15.2</h1>
+
 <h3>About</h3>
 This minigame is a competition between 6 Teams which have to finde 9 random generated items. <br>
 The first team which has all items wins.
