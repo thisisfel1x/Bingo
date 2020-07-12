@@ -3,7 +3,6 @@ package de.fel1x.bingo.tasks;
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.gamehandler.Gamestate;
 import de.fel1x.bingo.objects.BingoTeam;
-import de.fel1x.bingo.scenarios.AnvilRain;
 import de.fel1x.bingo.scenarios.IBingoScenario;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -144,4 +143,7 @@ public class GameTask implements IBingoTask {
 
     }
 
+    public BossBar getBossBar() {
+        return bossBar;
+    }
 }

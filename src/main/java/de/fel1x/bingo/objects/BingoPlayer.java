@@ -2,6 +2,7 @@ package de.fel1x.bingo.objects;
 
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.Data;
+import de.fel1x.bingo.tasks.GameTask;
 import de.fel1x.bingo.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -17,6 +18,8 @@ public class BingoPlayer {
 
     Bingo bingo = Bingo.getInstance();
     Data data = Bingo.getInstance().getData();
+
+    GameTask gameTask = new GameTask();
 
     public BingoPlayer(Player player) {
         this.player = player;
@@ -134,6 +137,8 @@ public class BingoPlayer {
         player.teleport(new Location(Bukkit.getWorlds().get(0), 0.5, 121, 0.5));
 
         player.getInventory().setItem(0, new ItemBuilder(Material.COMPASS).setName("§7Spieler beoabachten").toItemStack());
+
+        gameTask.getBossBar().addPlayer(player);
 
     }
 }
