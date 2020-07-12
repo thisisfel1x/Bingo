@@ -46,9 +46,11 @@ public class BingoPlayer {
         return data.getSpectators().contains(player);
     }
 
-    public void cleanupOnJoin() {
+    public void setScoreboardOnJoin() {
+        this.bingo.getBingoScoreboard().handleJoin(player);
+    }
 
-        bingo.getBingoScoreboard().handleJoin(player);
+    public void cleanupOnJoin() {
 
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
@@ -64,6 +66,8 @@ public class BingoPlayer {
         for (PotionEffect activePotionEffect : player.getActivePotionEffects()) {
             player.removePotionEffect(activePotionEffect.getType());
         }
+
+        player.setPlayerListHeaderFooter("\n §8» §bteamcrimx§lDE §8« \n", "\n §aBingo\n ");
 
     }
 

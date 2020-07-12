@@ -23,16 +23,22 @@ public class DamageListener implements Listener {
 
         Gamestate gamestate = bingo.getGamestateHandler().getGamestate();
 
-        if (!gamestate.equals(Gamestate.INGAME)) {
-            event.setCancelled(true);
-        } else {
-            if ((event.getDamager() instanceof Player
-                    && event.getEntity() instanceof Player) ||
-                    event.getEntity() instanceof Player &&
-                            new BingoPlayer((Player) event.getEntity()).isSpectator()) {
+        if (gamestate.equals(Gamestate.INGAME)) {
+
+            if (!(event.getDamager() instanceof Player)) return;
+
+            Player damager = (Player) event.getDamager();
+            BingoPlayer bingoDamager = new BingoPlayer(damager);
+
+            if (bingoDamager.isSpectator()) {
                 event.setCancelled(true);
+                return;
             }
+
+            if (!(event.getEntity() instanceof Player)) return;
+
         }
+        event.setCancelled(true);
 
     }
 

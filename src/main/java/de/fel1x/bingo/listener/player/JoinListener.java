@@ -59,6 +59,8 @@ public class JoinListener implements Listener {
 
         }
 
+        bingoPlayer.setScoreboardOnJoin();
+
         if (bingo.getData().getPlayers().size() >= neededPlayers
                 && gamestate.equals(Gamestate.IDLE)) {
 

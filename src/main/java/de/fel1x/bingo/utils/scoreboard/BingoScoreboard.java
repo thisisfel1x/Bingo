@@ -4,6 +4,7 @@ import de.fel1x.bingo.objects.BingoPlayer;
 import de.fel1x.bingo.objects.BingoTeam;
 import de.fel1x.bingo.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -23,8 +24,8 @@ public class BingoScoreboard {
             "§7Sammle alle §c9 Items",
             "§7und §agewinne die Runde",
             "",
-            "§8(§a/backpack§8)",
-            "§8(§a/items§8)"
+            "§8(§a§l/backpack§r§8)",
+            "§8(§a§l/items§r§8)"
 
     };
 
@@ -51,8 +52,10 @@ public class BingoScoreboard {
             String color = Utils.getChatColor(bingoTeam.getColor()).toString();
 
             Team team = gameScoreboard.registerNewTeam("00" + counter + bingoTeam.getName());
+
             team.setPrefix(String.format("%s%s" + " §8| %s", color, bingoTeam.getName(), color));
             team.setDisplayName(color);
+            team.setColor(Objects.requireNonNull(Utils.getChatColor(bingoTeam.getColor())));
 
             scoreboardTeams.put(bingoTeam, team);
             counter++;
@@ -62,6 +65,7 @@ public class BingoScoreboard {
         spectatorTeam = gameScoreboard.registerNewTeam("00999Spectator");
         spectatorTeam.setPrefix("§7§oSpectator §r§8| §7");
         spectatorTeam.setDisplayName("§7");
+        spectatorTeam.setColor(ChatColor.GRAY);
 
         for (int i = 1; i <= 6; i++) {
             Team top = gameScoreboard.registerNewTeam("top" + i);
@@ -98,8 +102,13 @@ public class BingoScoreboard {
 
             });
 
-            team.addEntry(player.getName());
-            player.setDisplayName(team.getDisplayName() + player.getName());
+            if(bingoPlayer.isSpectator()) {
+                this.spectatorTeam.addEntry(player.getName());
+                player.setDisplayName(this.spectatorTeam.getDisplayName() + player.getName());
+            } else {
+                team.addEntry(player.getName());
+                player.setDisplayName(team.getDisplayName() + player.getName());
+            }
 
         }
 
@@ -117,10 +126,6 @@ public class BingoScoreboard {
             BingoPlayer bingoPlayer = new BingoPlayer(player);
             BingoTeam bingoTeam = bingoPlayer.getTeam();
 
-            if (bingoTeam == null) return;
-
-            Team team = this.scoreboardTeams.get(bingoTeam);
-
             gameScoreboard.getTeams().forEach(scoreboardTeam -> {
 
                 if (scoreboardTeam.hasEntry(player.getName())) {
@@ -128,6 +133,15 @@ public class BingoScoreboard {
                 }
 
             });
+
+            if(bingoPlayer.isSpectator()) {
+                this.spectatorTeam.addEntry(player.getName());
+                player.setDisplayName(this.spectatorTeam.getDisplayName() + player.getName());
+            }
+
+            if (bingoTeam == null) return;
+
+            Team team = this.scoreboardTeams.get(bingoTeam);
 
             team.addEntry(player.getName());
             player.setDisplayName(team.getDisplayName() + player.getName());
