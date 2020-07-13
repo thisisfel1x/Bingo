@@ -1,6 +1,7 @@
 package de.fel1x.bingo.utils;
 
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
 
 public class Utils {
 

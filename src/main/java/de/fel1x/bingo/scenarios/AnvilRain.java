@@ -2,7 +2,6 @@ package de.fel1x.bingo.scenarios;
 
 import de.fel1x.bingo.Bingo;
 import de.fel1x.bingo.Data;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -41,7 +40,8 @@ public class AnvilRain implements IBingoScenario {
                         int z = (random.nextInt(7)) * ((random.nextBoolean()) ? 1 : -1);
                         Block blockToChange = currentLocation.add(x, 25, z).getBlock();
 
-                        if (blockToChange.getType() != Material.AIR && blockToChange.getType() != Material.CAVE_AIR) continue;
+                        if (blockToChange.getType() != Material.AIR && blockToChange.getType() != Material.CAVE_AIR)
+                            continue;
 
                         FallingBlock fallingBlock = blockToChange.getLocation().getWorld().spawnFallingBlock(blockToChange.getLocation(),
                                 new MaterialData(Material.ANVIL));
@@ -50,7 +50,7 @@ public class AnvilRain implements IBingoScenario {
 
                     }
 
-                    if(timer == 10) {
+                    if (timer == 10) {
                         this.cancel();
                     }
 

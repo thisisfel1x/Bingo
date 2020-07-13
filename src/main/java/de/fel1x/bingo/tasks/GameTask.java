@@ -47,7 +47,7 @@ public class GameTask implements IBingoTask {
 
                 bossBar.setColor(this.getColor(eventTimer));
                 bossBar.setProgress(eventTimer / timeToGo);
-                if(eventTimer > 0) {
+                if (eventTimer > 0) {
                     bossBar.setTitle(String.format("§7Nächstes Event in §e%s", ((eventTimer == 1) ? "einer Sekunde" :
                             ((eventTimer <= 60) ? eventTimer + " Sekunden" :
                                     String.format("%02d:%02d", eventTimer / 60, eventTimer % 60)))));

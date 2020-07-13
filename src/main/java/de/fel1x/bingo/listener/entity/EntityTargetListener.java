@@ -19,12 +19,12 @@ public class EntityTargetListener implements Listener {
     @EventHandler
     public void on(EntityTargetEvent event) {
 
-        if(event.getTarget() instanceof Player) {
+        if (event.getTarget() instanceof Player) {
 
             Player player = (Player) event.getTarget();
             BingoPlayer bingoPlayer = new BingoPlayer(player);
 
-            if(bingoPlayer.isSpectator()) {
+            if (bingoPlayer.isSpectator()) {
                 event.setCancelled(true);
             }
 
