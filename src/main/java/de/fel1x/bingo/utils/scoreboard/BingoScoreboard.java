@@ -102,7 +102,7 @@ public class BingoScoreboard {
 
             });
 
-            if(bingoPlayer.isSpectator()) {
+            if (bingoPlayer.isSpectator()) {
                 this.spectatorTeam.addEntry(player.getName());
                 player.setDisplayName(this.spectatorTeam.getDisplayName() + player.getName());
             } else {
@@ -134,7 +134,7 @@ public class BingoScoreboard {
 
             });
 
-            if(bingoPlayer.isSpectator()) {
+            if (bingoPlayer.isSpectator()) {
                 this.spectatorTeam.addEntry(player.getName());
                 player.setDisplayName(this.spectatorTeam.getDisplayName() + player.getName());
             }

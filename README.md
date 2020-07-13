@@ -11,7 +11,7 @@ The first team which found all nine items wins.
 
 ## Config
 Currently, there is no config available (planned for update 1.4) </br>
-If you are a developer, you can change following directly in the code: </br> </br>
+If you are a developer, you can change following directly in the code: </br>
 
 `de.fel1x.bingo.generation.ItemGenerator.java` - Change `BingoDifficulty` in line 16 </br>
 to either **EASY**, **MIDDLE** or **HARDCORE**

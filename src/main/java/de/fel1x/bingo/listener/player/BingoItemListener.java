@@ -58,7 +58,7 @@ public class BingoItemListener implements Listener {
 
                 if ((bingoPlayer.isPlayer() && !bingoPlayer.getTeam().equals(event.getTeam())) || bingoPlayer.isSpectator()) {
                     player.teleport(event.getPlayer());
-                    if(bingoPlayer.isSpectator()) {
+                    if (bingoPlayer.isSpectator()) {
                         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> onlinePlayer.showPlayer(bingo, onlinePlayer));
                     }
                 }
@@ -91,7 +91,7 @@ public class BingoItemListener implements Listener {
                             firework.setFireworkMeta(meta);
                         }
 
-                        if(timer == 10) {
+                        if (timer == 10) {
                             this.cancel();
                         }
 

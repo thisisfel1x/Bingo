@@ -24,18 +24,18 @@ public class BlockTransformListener implements Listener {
 
         Entity entity = event.getEntity();
 
-        if(event.getEntity() instanceof FallingBlock) {
+        if (event.getEntity() instanceof FallingBlock) {
 
-            if(bingo.getFallingAnvils().contains(entity)) {
+            if (bingo.getFallingAnvils().contains(entity)) {
                 event.getBlock().setType(Material.AIR);
                 entity.remove();
                 event.getBlock().getDrops().clear();
                 event.setCancelled(true);
                 event.getEntity().getNearbyEntities(0, 1, 0).forEach(nearbyEntities -> {
-                    if(!(nearbyEntities instanceof Player)) return;
+                    if (!(nearbyEntities instanceof Player)) return;
 
                     Player player = (Player) nearbyEntities;
-                    if(!player.isDead()) {
+                    if (!player.isDead()) {
                         player.setHealth(0D);
 
                         Bukkit.broadcastMessage(bingo.getPrefix() + player.getDisplayName() + " §7wurde von einem Amboss zerquetscht");
@@ -45,7 +45,7 @@ public class BlockTransformListener implements Listener {
 
                 bingo.getFallingAnvils().remove(entity);
 
-            } else if(bingo.getFallingGlassBlocks().contains(entity)) {
+            } else if (bingo.getFallingGlassBlocks().contains(entity)) {
 
                 event.setCancelled(true);
 

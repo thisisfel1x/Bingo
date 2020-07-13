@@ -30,7 +30,7 @@ public class FoodListener implements Listener {
         if (!gamestate.equals(Gamestate.INGAME)) {
             event.setCancelled(true);
         } else {
-            if(bingoPlayer.isSpectator()) {
+            if (bingoPlayer.isSpectator()) {
                 event.setCancelled(true);
             }
         }

@@ -57,7 +57,7 @@ public class InteractListener implements Listener {
 
             case INGAME:
 
-                if(bingoPlayer.isSpectator()) {
+                if (bingoPlayer.isSpectator()) {
                     event.setCancelled(true);
 
                     if (event.getMaterial().equals(Material.COMPASS)

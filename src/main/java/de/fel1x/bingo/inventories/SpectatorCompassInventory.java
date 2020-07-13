@@ -38,7 +38,7 @@ public class SpectatorCompassInventory implements InventoryProvider {
             skull.setItemMeta(itemMeta);
             contents.set(row, column, ClickableItem.of(skull, event -> {
 
-                if(!(event.getWhoClicked() instanceof Player)) return;
+                if (!(event.getWhoClicked() instanceof Player)) return;
 
                 Player clicker = (Player) event.getWhoClicked();
                 Player toTp = Bukkit.getPlayer(event.getCurrentItem().getItemMeta().getDisplayName());
@@ -55,7 +55,7 @@ public class SpectatorCompassInventory implements InventoryProvider {
 
             column++;
 
-            if(column == 9) {
+            if (column == 9) {
                 column = 0;
                 row += 1;
             }
@@ -75,7 +75,7 @@ public class SpectatorCompassInventory implements InventoryProvider {
             ItemStack skull = SkullCreator.itemFromUuid(current.getUniqueId());
             contents.set(row, column, ClickableItem.of(skull, event -> {
 
-                if(!(event.getWhoClicked() instanceof Player)) return;
+                if (!(event.getWhoClicked() instanceof Player)) return;
 
                 Player clicker = (Player) event.getWhoClicked();
                 Player toTp = Bukkit.getPlayer(event.getCurrentItem().getItemMeta().getDisplayName());
@@ -91,7 +91,7 @@ public class SpectatorCompassInventory implements InventoryProvider {
 
             column++;
 
-            if(column == 9) {
+            if (column == 9) {
                 column = 0;
                 row += 1;
             }
