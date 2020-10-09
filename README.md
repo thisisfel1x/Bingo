@@ -1,4 +1,4 @@
-# Bingo -  a minigame for PaperSpigot 1.15.2
+# Bingo -  a minigame for PaperSpigot 1.16.3
 
 ## About
 This minigame is a competition between 6 Teams which have to find 9 random generated items. </br>
@@ -25,7 +25,7 @@ you can change following formula: (line 37) </br>
 `int neededPlayers = (BingoTeam.RED.getTeamSize() * 2) - bingo.getData().getPlayers().size();` (default / result: min. 4 Players) </br>
 
 ## Contribute 
-If you want tho contribute, fork this project, grab some stuff from the `Projects` page on GitHub or implement your own ideas </br>
+If you want tho contribute, fork this project, grab some stuff from the `Projects` page on GitHub or implement your own ideas
 and send in a pull request :)
 
 ## License
