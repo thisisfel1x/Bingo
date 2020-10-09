@@ -1,4 +1,4 @@
-# Bingo -  a minigame for PaperSpigot 1.15.2 - 1.16.3
+# Bingo -  a minigame for PaperSpigot 1.16.3
 
 ## About
 This minigame is a competition between 6 Teams which have to find 9 random generated items. </br>
